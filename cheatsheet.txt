@@ -1,0 +1,15 @@
+#cheatsheet
+#
+#initiate
+#git init
+#(git remote add origin https://github.com/[USER]/[REPO].git)
+
+#branches
+#git checkout -b NEW_BRANCHNAME
+
+
+#normal work
+#git add (. || FILE)
+#(git rm FILE)
+#git commit -am "minor updates"
+#git push

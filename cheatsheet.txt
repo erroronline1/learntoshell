@@ -7,7 +7,6 @@
 #branches
 #git checkout -b NEW_BRANCHNAME
 
-
 #normal work
 #git add (. || FILE)
 #(git rm FILE)

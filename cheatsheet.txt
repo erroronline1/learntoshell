@@ -1,14 +1,19 @@
-#cheatsheet
-#
-#initiate
-#git init
-#(git remote add origin https://github.com/[USER]/[REPO].git)
+everyday cheatsheet
 
-#branches
-#git checkout -b NEW_BRANCHNAME
+initiate:
+	git init
+	(git remote add origin https://github.com/[USER]/[REPO].git)
 
-#normal work
-#git add (. || FILE)
-#(git rm FILE)
-#git commit -am "minor updates"
-#git push
+normal work:
+	git add (. || FILE)
+	(git rm FILE)
+	git commit -am "minor updates"
+	git push
+
+branches:
+	git branch NEW_BRANCHNAME
+	git checkout BRANCHNAME || master
+	git checkout -b NEW_BRANCHNAME (new branch and immediate change to branch)
+
+merge:
+	git merge BRANCHNAME_TO_TAKE_FROM

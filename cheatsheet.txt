@@ -14,6 +14,8 @@ branches:
 	git branch NEW_BRANCHNAME
 	git checkout BRANCHNAME || master
 	git checkout -b NEW_BRANCHNAME (new branch and immediate change to branch)
+	git branch -d TO_BE_DELETED_BRANCH
+	(git push origin --delete TO_BE_DELETED_REMOTE_BRANCH)
 
 merge:
 	git merge BRANCHNAME_TO_TAKE_FROM

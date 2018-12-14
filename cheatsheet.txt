@@ -8,7 +8,12 @@ normal work:
 	git add (. || FILE)
 	(git rm FILE)
 	git commit -am "minor updates"
+	git commit --amend
+	git commit FILE --reuse-message=HEAD
 	(git push)
+
+in case of messed up commits
+	rm -force .git/index.lock
 
 branches:
 	git branch NEW_BRANCHNAME

@@ -29,3 +29,6 @@ git has so many features so i tried to figure out the most useful commands for m
 
 ### merge:
 	git merge BRANCHNAME_TO_TAKE_FROM
+
+### md styling
+[https://gist.github.com/milkbread/5795012](https://gist.github.com/milkbread/5795012)

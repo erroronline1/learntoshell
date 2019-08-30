@@ -59,5 +59,19 @@ git status
 git diff HEAD~3 HEAD optional_distinct_file
 ```
 
+### handling remote repositories on usb
+```console
+#init bare remote repository
+git init --bare J:\repo_name
+#cd to local repository
+git remote add usb J:\repo_name
+git checkout master
+git push usb master
+git pull usb master
+#if usb shows up on different drive letter
+git remote set-url usb K:\repo_name
+```
+*[shortened from stack overflow user binaryfunt](https://stackoverflow.com/questions/43569757/how-to-use-usb-drive-as-remote)*
+
 ### md styling
 [https://gist.github.com/milkbread/5795012](https://gist.github.com/milkbread/5795012)

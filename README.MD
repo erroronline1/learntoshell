@@ -49,5 +49,15 @@ git branch -d TO_BE_DELETED_BRANCH
 git merge BRANCHNAME_TO_TAKE_FROM
 ```
 
+### show info
+```console
+# show commit history, q to quit
+git log
+# differences in commits between local and remote branch, commits and changes
+git status
+# show difference in source code between old (e.g. 3 commit back then) and new head. commit-hashes can be used instead of head
+git diff HEAD~3 HEAD optional_distinct_file
+```
+
 ### md styling
 [https://gist.github.com/milkbread/5795012](https://gist.github.com/milkbread/5795012)

@@ -75,3 +75,9 @@ git remote set-url usb K:\repo_name
 
 ### md styling
 [https://gist.github.com/milkbread/5795012](https://gist.github.com/milkbread/5795012)
+
+### how to exit vim
+[https://www.fprintf.net/vimCheatSheet.html](https://www.fprintf.net/vimCheatSheet.html)
+
+	:q(!)
+	:wq(!)

@@ -81,3 +81,9 @@ git remote set-url usb K:\repo_name
 
 	:q(!)
 	:wq(!)
+
+
+### test
+
+| markdown | table |
+| vsc is a bit | mimimi |

@@ -23,6 +23,8 @@ git commit -am"minor updates"
 git commit --amend
 git commit FILE --reuse-message=HEAD
 (git push)
+# rename
+mv oldfilename newfilename
 ```
 
 ### in case of messed up commits

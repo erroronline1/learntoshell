@@ -25,5 +25,5 @@ rem ----------eof-----------
 
 rem after resolving some errors this works as intented, but during the learning process another approach was way more useful. 
 rem the following solution works perfectly fine and much faster too thanks to stackoverflow user compo.
-rem set /a levels = %~1 + 1
-rem (for /f tokens^=* %%G in ('%__APPDIR__%Robocopy.exe . . /e /l /lev:%levels% /nc /ns /nfl /njh /njs /xd .* 2^> nul') do echo %%G) 1> "list.txt"
+set /a levels = %~1 + 1
+(for /f tokens^=* %%G in ('%__APPDIR__%Robocopy.exe . . /e /l /lev:%levels% /nc /ns /nfl /njh /njs /xd .* 2^> nul') do echo %%G) 1> "list.txt"

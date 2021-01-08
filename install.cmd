@@ -14,9 +14,8 @@ set process[0]=AdobeARMservice
 set process[1]=AGMService
 set process[2]=AGSService
 set process[3]=AcroTray
-set process[4]=ClickToRunSvc
-set process[5]="Killer Analytics Service"
-set process[6]="Dell SupportAssist Remediation"
+set process[4]="Killer Analytics Service"
+set process[5]="Dell SupportAssist Remediation"
 
 rem ####################################################
 rem upgrade pip and install libraries

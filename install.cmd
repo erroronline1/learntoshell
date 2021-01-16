@@ -9,6 +9,8 @@ rem set up variables
 set pip[0]=PILLOW
 set pip[1]=pypiwin32
 set pip[2]=pyinstaller
+set pip[3]=requests
+set pip[4]=XslxWriter
 
 set process[0]=AdobeARMservice
 set process[1]=AGMService

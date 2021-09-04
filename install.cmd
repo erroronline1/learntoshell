@@ -11,6 +11,14 @@ set pip[1]=pypiwin32
 set pip[2]=pyinstaller
 set pip[3]=requests
 set pip[4]=XslxWriter
+set pip[5]=eel
+set pip[6]=opencv-python-headless
+set pip[7]=pyzbar
+set pip[8]=kivy
+set pip[9]=psutil
+rem set pip[]=buildozer
+rem remember kivy might run in a virtual environment only, so some modules might have to be reinstalled there as well
+rem same goes for wsl
 
 set process[0]=AdobeARMservice
 set process[1]=AGMService

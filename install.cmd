@@ -17,6 +17,8 @@ set pip[7]=pyzbar
 set pip[8]=kivy
 set pip[9]=psutil
 set pip[10]=win10toast
+set pip[11]=colorama
+set pip[12]=cchardet
 rem set pip[]=buildozer
 rem remember kivy might run in a virtual environment only, so some modules might have to be reinstalled there as well
 rem same goes for wsl

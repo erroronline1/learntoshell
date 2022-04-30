@@ -2,53 +2,36 @@
 rem reinstalling a system is annoying enough. i guess i'll be happy next time to not having to find out another time why the scripts won't run.
 rem also in hope for quicker disabling auf services this routine might help. if you accomodate it to your needs make sure not to make your system unstable.
 rem make sure to run this in administrator mode
+rem note to self: loop variables are allowed with one character only
 
 rem ####################################################
 rem set up variables
 
-set pip[0]=PILLOW
-set pip[1]=pypiwin32
-set pip[2]=pyinstaller
-set pip[3]=requests
-set pip[4]=XslxWriter
-set pip[5]=eel
-set pip[6]=opencv-python-headless
-set pip[7]=pyzbar
-set pip[8]=kivy
-set pip[9]=psutil
-set pip[10]=win10toast
-set pip[11]=colorama
-set pip[12]=cchardet
-rem set pip[]=buildozer
+set python="C:\Program Files\Python36\python.exe" "C:\Program Files\Python38\python.exe"
+
+set pip=cchardet colorama eel kivy opencv-python-headless PILLOW psutil pyinstaller pypiwin32 pyzbar requests win10toast XslxWriter
+rem set pip=%pip%;buildozer
 rem remember kivy might run in a virtual environment only, so some modules might have to be reinstalled there as well
 rem same goes for wsl
 
-set process[0]=AdobeARMservice
-set process[1]=AGMService
-set process[2]=AGSService
-set process[3]=AcroTray
-set process[4]="Killer Analytics Service"
-set process[5]="Dell SupportAssist Remediation"
+set process=AdobeARMservice AGMService AGSService AcroTray "Killer Analytics Service" "Dell SupportAssist Remediation"
 
 rem ####################################################
-rem upgrade pip and install libraries
+rem upgrade pip and install libraries for all python versions
 
-python -m pip install --upgrade pip
-set "x=0"
-:pipLoop
-if defined pip[%x%] (
-    call echo installing %%pip[%x%]%%...
-    call pip install %%pip[%x%]%%
-    set /a "x+=1"
-    GOTO :pipLoop
+for %%p in (%python%) do (
+    call %%p -m pip install --upgrade pip
+    for %%i in (%pip%) do (
+        echo installing %%i for %%p...
+        call %%p%% -m pip install --upgrade %i
+    )
 )
-
 rem ####################################################
 rem view or disable services
 
 echo if you are unsure which services currently are in effect and what their names are you can view a recent list.
 echo the list will be created in the current directory and instantaneously deleted. you can save it elsewhere though and complete the variable on top if this batch-file
-set /p action=(v)iew list or (c)ontinue disabling (ctrl + x to abort): 
+set /p action=(v)iew list, (c)ontinue disabling or (s)kip disabling: 
 
 if /I "%action%"=="v" (
     call sc query >> service_processes_overview.txt
@@ -56,14 +39,10 @@ if /I "%action%"=="v" (
     call del service_processes_overview.txt
 )
 if /I "%action%"=="c" (
-    set "x=0"
-    :processLoop
-    if defined process[%x%] (
-        call echo disabling %%process[%x%]%%...
-        call sc stop %%process[%x%]%%
-        call sc config %%process[%x%]%% start= disabled
-        set /a "x+=1"
-        GOTO :processLoop
+    for %%p in (%process%) do (
+        call echo disabling %%p...
+        call sc stop %%p
+        call sc config %%p start= disabled
     )
 )
 

@@ -4,27 +4,31 @@
 :: make sure to run this in administrator mode
 :: note to self: loop variables are allowed with one character only
 
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: set up / register custom cmd environment
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: set up / register custom shell environment
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-set batchrc="C:\\Users\\dev\\Documents\\code\\learntoshell\\batchrc.cmd"
+set ps="C:\\Users\\dev\\Documents\\code\\learntoshell\\batchrc.ps1"
+set cmd="C:\\Users\\dev\\Documents\\code\\learntoshell\\batchrc.cmd"
 
-if exist %batchrc% (
+if exist %ps% (
+    mkdir %USERPROFILE%\Documents\WindowsPowerShell
+    copy %ps% %USERPROFILE%\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+)
+if exist %cmd% (
     echo Windows Registry Editor Version 5.00 > regbatchrc.reg
     echo. >> regbatchrc.reg
     echo [HKEY_CURRENT_USER\Software\Microsoft\Command Processor] >> regbatchrc.reg
-    echo "AutoRun"=%batchrc% >> regbatchrc.reg
+    echo "AutoRun"=%cmd% >> regbatchrc.reg
     call regbatchrc.reg
     del regbatchrc.reg
 )
-goto:eof
-
 :: goto:eof
 
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: upgrade pip and install libraries for all python versions
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: set python="C:\Program Files\Python36\python.exe" "C:\Program Files\Python38\python.exe"
 set python=py36 py38
@@ -44,9 +48,9 @@ for %%p in (%python%) do (
 :: goto:eof
 
 
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: view or disable services
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 set process=AdobeARMservice AGMService AGSService AcroTray "Killer Analytics Service" "Dell SupportAssist Remediation"
 
@@ -67,5 +71,6 @@ if /I "%action%"=="c" (
     )
 )
 :: goto:eof
+
 
 pause

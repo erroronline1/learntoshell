@@ -1,23 +1,38 @@
 @echo off
-rem reinstalling a system is annoying enough. i guess i'll be happy next time to not having to find out another time why the scripts won't run.
-rem also in hope for quicker disabling auf services this routine might help. if you accomodate it to your needs make sure not to make your system unstable.
-rem make sure to run this in administrator mode
-rem note to self: loop variables are allowed with one character only
+:: reinstalling a system is annoying enough. i guess i'll be happy next time to not having to find out another time why the scripts won't run.
+:: also in hope for quicker disabling auf services this routine might help. if you accomodate it to your needs make sure not to make your system unstable.
+:: make sure to run this in administrator mode
+:: note to self: loop variables are allowed with one character only
 
-rem ####################################################
-rem set up variables
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: set up / register custom cmd environment
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-set python="C:\Program Files\Python36\python.exe" "C:\Program Files\Python38\python.exe"
+set batchrc="C:\\Users\\dev\\Documents\\code\\learntoshell\\batchrc.cmd"
+
+if exist %batchrc% (
+    echo Windows Registry Editor Version 5.00 > regbatchrc.reg
+    echo. >> regbatchrc.reg
+    echo [HKEY_CURRENT_USER\Software\Microsoft\Command Processor] >> regbatchrc.reg
+    echo "AutoRun"=%batchrc% >> regbatchrc.reg
+    call regbatchrc.reg
+    del regbatchrc.reg
+)
+goto:eof
+
+:: goto:eof
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: upgrade pip and install libraries for all python versions
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:: set python="C:\Program Files\Python36\python.exe" "C:\Program Files\Python38\python.exe"
+set python=py36 py38
 
 set pip=cchardet colorama eel kivy opencv-python-headless PILLOW psutil pyinstaller pypiwin32 pyzbar requests win10toast XslxWriter
-rem set pip=%pip%;buildozer
-rem remember kivy might run in a virtual environment only, so some modules might have to be reinstalled there as well
-rem same goes for wsl
-
-set process=AdobeARMservice AGMService AGSService AcroTray "Killer Analytics Service" "Dell SupportAssist Remediation"
-
-rem ####################################################
-rem upgrade pip and install libraries for all python versions
+:: set pip=%pip%;buildozer
+:: remember kivy might run in a virtual environment only, so some modules might have to be reinstalled there as well
+:: same goes for wsl
 
 for %%p in (%python%) do (
     call %%p -m pip install --upgrade pip
@@ -26,8 +41,14 @@ for %%p in (%python%) do (
         call %%p%% -m pip install --upgrade %i
     )
 )
-rem ####################################################
-rem view or disable services
+:: goto:eof
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: view or disable services
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+set process=AdobeARMservice AGMService AGSService AcroTray "Killer Analytics Service" "Dell SupportAssist Remediation"
 
 echo if you are unsure which services currently are in effect and what their names are you can view a recent list.
 echo the list will be created in the current directory and instantaneously deleted. you can save it elsewhere though and complete the variable on top if this batch-file
@@ -45,5 +66,6 @@ if /I "%action%"=="c" (
         call sc config %%p start= disabled
     )
 )
+:: goto:eof
 
 pause

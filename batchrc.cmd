@@ -12,3 +12,8 @@ doskey py38="C:\Program Files\Python38\python.exe" $*
 
 doskey code=cd %USERPROFILE%\Documents\code
 doskey stick=cd %USERPROFILE%\Documents\arbeit\stick
+
+
+:: shortcuts
+
+doskey eject=powershell (New-Object -comObject Shell.Application).Namespace(17).ParseName(""""$1:\\"""").InvokeVerb(""""Eject"""")

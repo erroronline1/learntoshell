@@ -4,7 +4,7 @@
 
 :: python versions
 
-doskey py36="C:\Program Files\Python36\python.exe" $*
+:: doskey py36="C:\Program Files\Python36\python.exe" $*
 doskey py38="C:\Program Files\Python38\python.exe" $*
 
 

@@ -31,9 +31,9 @@ if exist %cmd% (
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: set python="C:\Program Files\Python36\python.exe" "C:\Program Files\Python38\python.exe"
-set python=py36 py38
+set python=py38
 
-set pip=cchardet colorama eel kivy opencv-python-headless PILLOW psutil pyinstaller pypiwin32 pyzbar requests win10toast XslxWriter fpdf qrcode
+set pip=cchardet colorama eel kivy opencv-python-headless PILLOW psutil pyinstaller pypiwin32 pyzbar requests win10toast XslxWriter fpdf qrcode wxPython
 :: set pip=%pip%;buildozer
 :: remember kivy might run in a virtual environment only, so some modules might have to be reinstalled there as well
 :: same goes for wsl

@@ -1,6 +1,6 @@
 # python versions
 
-Set-Alias -Name py36 -Value "C:\Program Files\Python36\python.exe"
+# Set-Alias -Name py36 -Value "C:\Program Files\Python36\python.exe"
 Set-Alias -Name py38 -Value "C:\Program Files\Python38\python.exe"
 
 

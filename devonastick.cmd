@@ -1,59 +1,64 @@
-@ECHO off
+@ECHO OFF
 
-SET available_python=0
-SET /p available_drive=[?] type accessible drive letter:
+:: possible issues: folders with whitespaces. i'm not getting starting and calling with quotes to work properly
 
-SET env[0].name="D:/qm/aqms/assistant/"
-SET env[0].location="%available_drive%:\qm\aqms\assistant"
-SET env[1].name="T:/ext03/OUK-TO-QM/code/aqms/assistant/"
-SET env[1].location="t:\ext03\OUK-TO-QM\code\aqms\assistant"
+:: runtime vars
+SET available_success=0
+SET /P available_drive=[?] type accessible drive letter: 
 
-CD /D %env[0].location:"=%
+:: setup vars
+SET stick_name="D:/qm/aqms/assistant/"
+SET stick_location="%available_drive%:\qm\aqms\assistant"
+SET network_name="T:/ext03/OUK-TO-QM/code/aqms/assistant/"
+SET network_location="T:\ext03\OUK-TO-QM\code\aqms\assistant"
+SET vsc_name="vsc portable"
+SET vsc_location="%available_drive%:\vsc\Code.exe"
+SET python_name="python"
+SET python_location="C:\Program Files\Python38"
+SET git_name="git portable"
+SET git_location="%available_drive%:\git\git-cmd.exe"
+
+:: change to 1st environment and launch a portable app
+CD %stick_location:~1,2% >> NUL
+IF NOT %cd%==%stick_location:"=% (
+	CD /D %stick_location:"=%
+)
 IF %errorlevel% GTR 0 (
-	SET available_drive=0
-	ECHO [X] drive not available or %env[0].name:"=% already reached
+	ECHO [X] drive [%available_drive%] not available
+	ECHO [x] %vsc_name:"=% could not be started
 ) ELSE (
 	ECHO [!] %cd% is prepared
-	START cmd /k %available_drive%:\vsc\code %env[1].location%
+	SET available_success=1
+	START CMD /K %vsc_location:"=% %network_location:"=%
 )
 
-CD /D %env[1].location:"=%
+:: change to 2nd environment, launch .venv, occasionally start project
+CD %network_location:~1,2% >> NUL
+IF NOT %cd%==%network_location:"=% (
+	CD /D %network_location:"=%
+)
 IF %errorlevel% GTR 0 (
-	ECHO [X] drive not available or %env[1].name:"=% already reached
+	ECHO [X] drive [%network_location:~1,2%] not available
 ) ELSE (
 	ECHO [!] %cd% is prepared
-	IF EXIST "C:\Program Files\Python38" (
-		SET available_python=1
-		CALL %env[1].location:"=%\.venv\Scripts\activate
+	IF EXIST %python_location% (
+		CALL %network_location:"=%\.venv\Scripts\activate
 		ECHO [!] virtual environment for python activated
+		START py "%network_location:"=%\assistant.py" --webfolder %network_name% --browser edge
 	) ELSE (
-		SET available_python=0
-		ECHO [X] python not available
-	)
-	
-	IF %available_python% GTR 0 (
-		SET /P py=[?] start assistant? [p for python, e for exe]
-	) ELSE (
-		SET /P py=[?] start assistant? [e for exe]
-	)
-	IF /I "%py%"=="p" (
-		IF %available_python% GTR 0 (
-			START py "%env[1].location:"=%\assistant.py" --webfolder: %env[1].name% --browser edge
-		) ELSE (
-			ECHO [X] python STILL not available
-		)
-	)
-	If /I "%py%"=="e" (
-		START "%env[1].location%:"=\assistant" --webfolder: %env[1].name% --browser edge
+		ECHO [X] %python_name:"=% not available
+		START %network_location:"=%\assistant --webfolder %network_name:"=% --browser edge
 	)
 )
 
-IF NOT %available_drive%==0 (
-	ECHO [!] activating git portable...
-	CALL %available_drive%:\git\git-cmd.exe
+:: launch git portable if available
+IF NOT %available_success%==0 (
+	:: git keeps terminal open
+	ECHO [!] activating %git_name:"=%...
+	CALL %git_location%
 ) ELSE (
-	ECHO [X] git not available
-	CMD /K
+	:: if started from gui the terminal will close afterwards
+	ECHO [X] %git_name:"=% not available due to missing drive [%available_drive%]
 	PAUSE
 )
 EXIT /B 0

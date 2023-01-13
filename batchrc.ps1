@@ -12,9 +12,9 @@ Function stick {Set-Location -Path $env:USERPROFILE\Documents\arbeit\stick}
 
 #shortcuts
 
-Function eject{
+Function unmount{
 Param(
 [Parameter(Mandatory=$true,Position=0)] [String]$Drive
 )
-powershell (New-Object -comObject Shell.Application).Namespace(17).ParseName($Drive+":\").InvokeVerb("Eject")
+powershell (New-Object -comObject Shell.Application).Namespace(17).ParseName($Drive+":\").InvokeVerb("Unmount")
 }

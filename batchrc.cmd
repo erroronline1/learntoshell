@@ -16,4 +16,4 @@ doskey stick=cd %USERPROFILE%\Documents\arbeit\stick
 
 :: shortcuts
 
-doskey eject=powershell (New-Object -comObject Shell.Application).Namespace(17).ParseName(""""$1:\\"""").InvokeVerb(""""Eject"""")
+doskey unmount=powershell (New-Object -comObject Shell.Application).Namespace(17).ParseName(""""$1:\\"""").InvokeVerb(""""Unmount"""")

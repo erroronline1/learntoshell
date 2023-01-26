@@ -27,6 +27,18 @@ git commit FILE --reuse-message=HEAD
 mv oldfilename newfilename
 ```
 
+### add but do not track
+````console
+git add database.php
+git commit
+git push
+git update-index --assume-unchanged database.php
+
+git update-index --no-assume-unchanged database.php
+git commit -a
+git update-index --assume-unchanged database.php
+```
+
 ### in case of messed up commits
 ```console
 # revert distinct file to previous state

@@ -9,6 +9,9 @@ sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft
 curl -fsSLo /usr/share/keyrings/mullvad-keyring.asc https://repository.mullvad.net/deb/mullvad-keyring.asc
 echo "deb [signed-by=/usr/share/keyrings/mullvad-keyring.asc arch=$( dpkg --print-architecture )] https://repository.mullvad.net/deb/stable stable main" | sudo tee /etc/apt/sources.list.d/mullvad.list
 
+add-apt-repository multiverse
+add-apt-repository ppa:linrunner/tlp
+
 apt update
 apt upgrade
 apt install software-properties-common apt-transport-https
@@ -20,7 +23,10 @@ apt install apache2
 apt install php
 apt install mariadb-server
 apt install code
-sudo apt install mullvad-vpn
+apt install mullvad-vpn
+apt install p7zip-full p7zip-rar
+apt install unrar
+apt install tlp tlp-rdw
 
 apt install imwheel
 echo "\".*\"" > ~/.imwheelrc
@@ -49,6 +55,7 @@ do
     pip install "$lib"
 done
 
+sudo tlp start
 
 systemctl start mariadb.service
 systemctl start apache2

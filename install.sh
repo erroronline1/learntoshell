@@ -49,7 +49,7 @@ flatpak install --system flathub org.videolan.VLC
 alias py='python3'
 echo "alias py='python3'" >> ~/.bashrc
 
-pip=("cchardet" "colorama" "eel" "kivy" "kivymd" "plyer" "opencv-python-headless" "PILLOW" "psutil" "pyinstaller" "pyzbar" "requests" "xlsxwriter" "fpdf" "qrcode" "wxPython" "paramiko")
+pip=("cchardet" "colorama" "eel" "kivy" "kivymd" "plyer" "opencv-python" "PILLOW" "psutil" "pyinstaller" "pyzbar" "requests" "xlsxwriter" "fpdf" "qrcode" "wxPython" "paramiko")
 for lib in "${pip[@]}"
 do
     pip install "$lib"

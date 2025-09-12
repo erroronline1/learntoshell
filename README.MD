@@ -19,6 +19,7 @@ git rm FILE
 # commit distinct files or all recent changes
 git commit -m"minor updates" filename_with_*wildcard
 git commit -am"minor updates"
+git commit -m"title" -m"message"
 # edit or reuse commit messages
 git commit --amend
 git commit FILE --reuse-message=HEAD
@@ -27,8 +28,17 @@ git commit FILE --reuse-message=HEAD
 mv oldfilename newfilename
 ```
 
+https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/
+
+### tagging for snapshots of commit state
+```console
+git tag -a v1.0 -m "Version 1.0"
+# tags have to be pushed extra
+git push origin v1.0
+```
+
 ### add but do not track
-````console
+```console
 git add database.php
 git commit
 git push
@@ -61,6 +71,11 @@ git branch -d TO_BE_DELETED_BRANCH
 ### merge:
 ```console
 git merge BRANCHNAME_TO_TAKE_FROM
+git merge --abort
+# accept current, incoming or both changes e.g. in vscode
+git add file.ext
+git add .
+git commit
 ```
 
 ### show info
@@ -75,14 +90,14 @@ git diff HEAD~3 HEAD optional_distinct_file
 
 ### handling remote repositories on usb
 ```console
-#init bare remote repository
+# init bare remote repository
 git init --bare J:\repo_name
-#cd to local repository
+# cd to local repository
 git remote add usb J:\repo_name
 git checkout master
 git push usb master
 git pull usb master
-#if usb shows up on different drive letter
+# if usb shows up on different drive letter
 git remote set-url usb K:\repo_name
 ```
 *[shortened from stack overflow user binaryfunt](https://stackoverflow.com/questions/43569757/how-to-use-usb-drive-as-remote)*

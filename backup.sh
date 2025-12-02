@@ -6,13 +6,10 @@ backup_files="/home/dev/Documents /home/dev/.config/OrcaSlicer/user/default /var
 destination_path="/mnt/nas_smb/doc"
 retention_days=10
 # git files will be ignored by default, because *i* do not have important local-only git projects and it would take forever
-# extend to any pattern that should be excluded with any option
-exclude_always=(".git")
-# to speed things up my file system contains *legacy* directories,
-# that are not supposed to be included in regular backups
-# due to non existant changes but required availability on my system
+# to speed things up my file system contains *legacy* directories, that are not supposed to be included in regular backups due to non existant changes but required availability on my system
 # extend to any pattern that should be excluded with the l option
-exclude_standard=("legacy/*")
+standard=(".git" "legacy/*")
+legacy=(".git")
 
 # archive filename.
 hostname=$(hostname -s)
@@ -29,26 +26,31 @@ else
     choice=${1:1:1}
 fi
 
-# construct chained standard exclusions
-always_exclude=""
-for pattern in "${exclude_always[@]}"; do
-    always_exclude=$always_exclude" --exclude=$pattern"
-done
-# construct chained legacy exclusions
-standard_exclude=""
-for pattern in "${exclude_standard[@]}"; do
-    standard_exclude=$standard_exclude" --exclude=$pattern"
-done
+# function to construct chained exclusions with passed setting
+exclude(){
+    local -n dir_list=$1 # passed list by name reference
+    excluded=""
+    for pattern in "${dir_list[@]}"; do
+        excluded=$excluded" --exclude=$pattern"
+    done
+    echo $excluded # can't return string, only integer. echo is fine
+}
 
 # backup files using tar based on choice to lower case
-if [ "${choice,,}" == "s" ]; then
-    tar $always_exclude $standard_exclude -cvf $destination_path/$archive_file $backup_files
-elif [ "${choice,,}" == "l" ]; then
-    # full backup filename has a modified filename to not being autodeleted
-    tar $always_exclude -cvf $destination_path/full_with_legacy_$archive_file $backup_files
-else
-    exit 1
-fi
+# wrapping the function call with parameter in backticks uses the result
+case "${choice,,}" in
+    "s")
+        tar `exclude standard` -cvf $destination_path/$archive_file $backup_files
+        ;;
+    "l")
+        # full backup filename has a modified filename to not being autodeleted
+        # the legacy dir should not be excluded, but this is the legacy setting ;)
+        tar `exclude legacy` -cvf $destination_path/full_with_legacy_$archive_file $backup_files
+        ;;
+    *)
+        exit 1
+        ;;
+esac
 
 # check if tar was successful, exit on fail
 if [ $? -eq 0 ]; then

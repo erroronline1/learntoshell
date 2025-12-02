@@ -22,6 +22,7 @@ apt install mullvad-vpn
 apt install p7zip-full p7zip-rar
 apt install unrar
 apt install tlp tlp-rdw
+apt install dropbox
 
 apt install imwheel
 echo "\".*\"" > ~/.imwheelrc
@@ -55,6 +56,21 @@ do
     pip install "$lib"
 done
 
+localectl set-locale LANG=en_GB.UTF-8
+localectl set-locale LANGUAGE=en_GB
+localectl set-locale LC_CTYPE="en_GB.UTF-8"
+localectl set-locale LC_NUMERIC=de_DE.UTF-8
+localectl set-locale LC_TIME=de_DE.UTF-8
+localectl set-locale LC_COLLATE="en_GB.UTF-8"
+localectl set-locale LC_MONETARY=de_DE.UTF-8
+localectl set-locale LC_MESSAGES="en_GB.UTF-8"
+localectl set-locale LC_PAPER=de_DE.UTF-8
+localectl set-locale LC_NAME=de_DE.UTF-8
+localectl set-locale LC_ADDRESS=de_DE.UTF-8
+localectl set-locale LC_TELEPHONE=de_DE.UTF-8
+localectl set-locale LC_MEASUREMENT=de_DE.UTF-8
+localectl set-locale LC_IDENTIFICATION=de_DE.UTF-8
+
 alias py='source ~/.venv/bin/activate'
 echo "alias py='source ~/.venv/bin/activate'" >> ~/.bashrc
 
@@ -75,4 +91,3 @@ flatpak run org.mozilla.firefox https://www.decocode.de/?php-lamp-server
 flatpak run org.mozilla.firefox https://stackoverflow.com/questions/4221874/how-do-i-allow-https-for-apache-on-localhost/49465073#49465073
 flatpak run org.mozilla.firefox https://github.com/EliverLara/Nordic
 flatpak run org.mozilla.firefox https://www.gnome-look.org/p/1209330/
-

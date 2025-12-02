@@ -49,7 +49,7 @@ apt install python3.12-venv
 cd ~
 python3 -m venv .venv
 source .venv/bin/activate
-pip=("cchardet" "colorama" "eel" "kivy" "kivymd" "plyer" "opencv-python" "PILLOW" "psutil" "pyinstaller" "pyzbar" "requests" "xlsxwriter" "fpdf" "qrcode" "wxPython" "paramiko", "qtsass")
+pip=("cchardet" "colorama" "eel" "kivy" "kivymd" "plyer" "opencv-python" "PILLOW" "psutil" "pyinstaller" "pyzbar" "requests" "xlsxwriter" "fpdf" "qrcode" "wxPython" "paramiko" "qtsass")
 for lib in "${pip[@]}"
 do
     pip install "$lib"

@@ -23,6 +23,8 @@ apt install p7zip-full p7zip-rar
 apt install unrar
 apt install tlp tlp-rdw
 apt install dropbox
+apt install filezilla
+apt install vlc
 
 apt install imwheel
 echo "\".*\"" > ~/.imwheelrc
@@ -31,20 +33,11 @@ echo "None, Down, Button5, 2" >> ~/.imwheelrc
 echo "Control_L, Up,   Control_L|Button4" >> ~/.imwheelrc
 echo "Control_L, Down, Control_L|Button5" >> ~/.imwheelrc
 
-#remove system packages replaced by flatpacks
-apt remove --purge firefox*
-apt remove --purge Thunderbird*
-
-flatpak install --system flathub org.mozilla.firefox
-flatpak install --system flathub org.mozilla.Thunderbird
-flatpak install --system flathub org.filezillaproject.Filezilla
 flatpak install --system flathub org.freecad.FreeCAD
 flatpak install --system flathub org.gimp.GIMP
 flatpak install --system flathub fr.handbrake.ghb
 flatpak install --system flathub org.inkscape.Inkscape
 flatpak install --system flathub org.kde.kdenlive
-flatpak install --system flathub org.libreoffice.LibreOffice
-flatpak install --system flathub org.videolan.VLC
 
 apt install python3.12-venv
 cd ~

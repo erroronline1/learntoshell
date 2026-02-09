@@ -2,9 +2,20 @@
 
 ## opposed to install.cmd i can install by default instead of disabling background processes B)
 
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
-sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+apt update
+apt upgrade
+apt install curl ca-certificates -y
+
+curl -fsSL https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | sudo gpg --dearmor -o /usr/share/keyrings/vscodium.gpg
+cat <<EOF | sudo tee /etc/apt/sources.list.d/vscodium.sources
+Types: deb
+URIs: https://download.vscodium.com/debs
+Suites: vscodium
+Components: main
+Signed-By: /usr/share/keyrings/vscodium.gpg
+EOF
+
+apt update
 
 curl -fsSLo /usr/share/keyrings/mullvad-keyring.asc https://repository.mullvad.net/deb/mullvad-keyring.asc
 echo "deb [signed-by=/usr/share/keyrings/mullvad-keyring.asc arch=$( dpkg --print-architecture )] https://repository.mullvad.net/deb/stable stable main" | sudo tee /etc/apt/sources.list.d/mullvad.list
@@ -14,10 +25,12 @@ add-apt-repository ppa:linrunner/tlp
 
 apt update
 apt upgrade
+
 apt install software-properties-common apt-transport-https
 
 apt install git
-apt install code
+apt install codium
+codium --install-extension dbaeumer.vscode-eslint ecmel.vscode-html-css yzane.markdown-pdf bierner.markdown-mermaid arcticicestudio.nord-visual-studio-code bmewburn.vscode-intelephense-client esbenp.prettier-vscode ms-python.pylint natizyskunk.sftp
 apt install mullvad-vpn
 apt install p7zip-full p7zip-rar
 apt install unrar
@@ -79,8 +92,8 @@ systemctl start apache2
 # fractional scaling primary screen factor 200
 xrandr --output eDP-1 --scale 0.5x0.5
 
-flatpak run org.mozilla.firefox https://linuxvox.com/blog/mounting-nas-on-linux/
-flatpak run org.mozilla.firefox https://www.decocode.de/?php-lamp-server
-flatpak run org.mozilla.firefox https://stackoverflow.com/questions/4221874/how-do-i-allow-https-for-apache-on-localhost/49465073#49465073
-flatpak run org.mozilla.firefox https://github.com/EliverLara/Nordic
-flatpak run org.mozilla.firefox https://www.gnome-look.org/p/1209330/
+firefox https://linuxvox.com/blog/mounting-nas-on-linux/
+firefox https://www.decocode.de/?php-lamp-server
+firefox https://stackoverflow.com/questions/4221874/how-do-i-allow-https-for-apache-on-localhost/49465073#49465073
+firefox https://github.com/EliverLara/Nordic
+firefox https://www.gnome-look.org/p/1209330/

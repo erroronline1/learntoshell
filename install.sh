@@ -51,6 +51,7 @@ flatpak install --system flathub org.gimp.GIMP
 flatpak install --system flathub fr.handbrake.ghb
 flatpak install --system flathub org.inkscape.Inkscape
 flatpak install --system flathub org.kde.kdenlive
+flatpak install --system flathub com.orcaslicer.OrcaSlicer
 
 apt install python3.12-venv
 cd ~

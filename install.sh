@@ -28,23 +28,8 @@ apt upgrade
 
 apt install software-properties-common apt-transport-https
 
-apt install git
-apt install codium
+apt install git codium mullvad-vpn p7zip-full p7zip-rar unrar tlp tlp-rdw dropbox filezilla vlc
 codium --install-extension dbaeumer.vscode-eslint ecmel.vscode-html-css yzane.markdown-pdf bierner.markdown-mermaid arcticicestudio.nord-visual-studio-code bmewburn.vscode-intelephense-client esbenp.prettier-vscode ms-python.pylint natizyskunk.sftp
-apt install mullvad-vpn
-apt install p7zip-full p7zip-rar
-apt install unrar
-apt install tlp tlp-rdw
-apt install dropbox
-apt install filezilla
-apt install vlc
-
-apt install imwheel
-echo "\".*\"" > ~/.imwheelrc
-echo "None, Up, Button4, 2" >> ~/.imwheelrc
-echo "None, Down, Button5, 2" >> ~/.imwheelrc
-echo "Control_L, Up,   Control_L|Button4" >> ~/.imwheelrc
-echo "Control_L, Down, Control_L|Button5" >> ~/.imwheelrc
 
 flatpak install --system flathub org.freecad.FreeCAD
 flatpak install --system flathub org.gimp.GIMP

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## opposed to install.cmd i can install by default instead of disabling background processes B)
+# opposed to install.cmd i can install by default instead of disabling background processes B)
 
 apt update
 apt upgrade
@@ -21,10 +21,24 @@ curl -fsSLo /usr/share/keyrings/mullvad-keyring.asc https://repository.mullvad.n
 echo "deb [signed-by=/usr/share/keyrings/mullvad-keyring.asc arch=$( dpkg --print-architecture )] https://repository.mullvad.net/deb/stable stable main" | sudo tee /etc/apt/sources.list.d/mullvad.list
 
 add-apt-repository multiverse
-add-apt-repository ppa:linrunner/tlp
+
+# tlp mint ubuntu version
+# add-apt-repository ppa:linrunner/tlp
+
+# tlp lmde version according to https://linrunner.de/tlp/installation/debian.html
+cat <<EOF | sudo tee /etc/apt/sources.list.d/vscodium.sources
+Types: deb deb-src
+URIs: http://deb.debian.org/debian
+Suites: Trixie-backports
+Components: main
+Enabled: yes
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+EOF
 
 apt update
 apt upgrade
+
+apt -t Trixie-backports install tlp tlp-pd tlp-rdw
 
 apt install software-properties-common apt-transport-https
 

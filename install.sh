@@ -26,7 +26,7 @@ add-apt-repository multiverse
 # add-apt-repository ppa:linrunner/tlp
 
 # tlp lmde version according to https://linrunner.de/tlp/installation/debian.html
-cat <<EOF | sudo tee /etc/apt/sources.list.d/vscodium.sources
+cat <<EOF | sudo tee /etc/apt/sources.list.d/debian-backports.sources
 Types: deb deb-src
 URIs: http://deb.debian.org/debian
 Suites: Trixie-backports
